@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Internship Scam Analyzer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="min-h-screen flex flex-col items-center py-10 px-4">
+
+    <!-- Header -->
+    <h1 class="text-4xl font-bold text-gray-800 mb-2 text-center">Internship Scam Analyzer</h1>
+    <p class="text-gray-600 mb-6 text-center max-w-xl">
+      Detect fraudulent internship offers using AI-powered analysis. Paste your offer, add URLs or screenshots, and get a detailed report.
+    </p>
+
+    <!-- Form Card -->
+    <div class="bg-white shadow-lg rounded-xl p-6 w-full max-w-2xl">
+      <form id="analyzeForm" class="space-y-4">
+
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">Internship Offer Text</label>
+          <textarea name="offer_text" placeholder="Paste the internship offer here..." class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">Company Website URL</label>
+          <input type="url" name="website_url" placeholder="https://company.com" class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">LinkedIn Profile URL</label>
+          <input type="url" name="linkedin_url" placeholder="https://linkedin.com/..." class="w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">Screenshot (optional)</label>
+          <input type="file" name="screenshot" accept="image/*" class="w-full">
+        </div>
+
+        <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+          Analyze
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading" class="hidden mt-6 text-gray-600 font-semibold">Analyzing...</div>
+
+    <!-- Result Card -->
+    <div id="result" class="hidden bg-white shadow-lg rounded-xl p-6 mt-6 w-full max-w-2xl">
+
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Analysis Result</h2>
+
+      <!-- Scam Score -->
+      <div class="mb-4">
+        <span id="scoreValue" class="text-lg font-semibold"></span>
+        <div class="w-full bg-gray-200 rounded-full h-4 mt-1">
+          <div id="scoreBar" class="h-4 rounded-full bg-red-500 w-0"></div>
+        </div>
+      </div>
+
+      <!-- Risk Level Badge -->
+      <div class="mb-4">
+        <span id="riskLevel" class="inline-block py-1 px-3 rounded-full text-white font-semibold"></span>
+      </div>
+
+      <!-- Red Flags -->
+      <h3 class="font-semibold text-gray-700 mb-2">Red Flags</h3>
+      <ul id="redFlags" class="list-disc list-inside mb-4 text-gray-600"></ul>
+
+      <!-- Summary -->
+      <h3 class="font-semibold text-gray-700 mb-2">Summary</h3>
+      <p id="summary" class="text-gray-600"></p>
+
+    </div>
+
+  </div>
+
+  <script src="js/analyze.js"></script>
+
+</body>
+</html>
