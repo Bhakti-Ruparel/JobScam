@@ -1,28 +1,38 @@
-import whois
-import requests
+# backend/app/services/website_checker.py
 
-def analyze_website(url: str):
-    result = {}
+from urllib.parse import urlparse
 
-    try:
-        domain = whois.whois(url)
-        result["domain_age"] = domain.creation_date
-    except:
-        result["domain_age"] = None
+FREE_HOSTING_DOMAINS = [
+    "github.io",
+    "wixsite.com",
+    "blogspot.com",
+    "netlify.app"
+]
 
-    try:
-        response = requests.get(url, timeout=5)
-        result["https"] = response.url.startswith("https")
-        result["status_code"] = response.status_code
-    except:
-        result["reachable"] = False
+def analyze_website(url: str) -> dict:
+    parsed = urlparse(url)
+    domain = parsed.netloc.lower()
 
-    scam_flags = []
-    if result.get("domain_age") is None:
-        scam_flags.append("Domain age unknown")
+    flags = []
+    score = 0
 
-    if not result.get("https"):
-        scam_flags.append("Website not secure")
+    # HTTPS check
+    if not url.startswith("https"):
+        flags.append("Website not using HTTPS")
+        score += 15
 
-    result["flags"] = scam_flags
-    return result
+    # Free hosting check
+    if any(free in domain for free in FREE_HOSTING_DOMAINS):
+        flags.append("Free hosting website")
+        score += 20
+
+    # Very short / weird domain
+    if len(domain) < 8:
+        flags.append("Suspicious domain length")
+        score += 10
+
+    return {
+        "domain": domain,
+        "flags": flags,
+        "risk_score": min(score, 40)
+    }
