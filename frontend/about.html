@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Internship Scam Detector</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🔍 Scam Detector</div>
+            <ul class="nav-menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="awareness.html">Awareness</a></li>
+                <li><a href="analyzer.html" class="cta-btn">Analyze Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>About Our Project</h1>
+            <p>Learn how we're fighting internship scams with AI technology</p>
+        </div>
+    </section>
+
+    <section class="about-content">
+        <div class="container">
+            <div class="about-section">
+                <h2>🎯 Our Mission</h2>
+                <p>We're on a mission to protect students and young professionals from falling victim to fake internship scams. Every year, thousands of job seekers lose money and personal information to fraudulent job postings. Our AI-powered platform helps identify these scams before they cause harm.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>🤖 The Technology</h2>
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <h3>Machine Learning Model</h3>
+                        <p>Trained on 27,566 job postings using Logistic Regression and Sentence Transformers (all-MiniLM-L6-v2) to create embeddings that capture semantic meaning.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>Natural Language Processing</h3>
+                        <p>Analyzes text for urgency indicators, emotional manipulation, grammar patterns, and suspicious phrases commonly found in scam postings.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>Multi-Factor Analysis</h3>
+                        <p>Combines ML predictions with rule-based checks on websites, LinkedIn profiles, and screenshot analysis for comprehensive detection.</p>
+                    </div>
+                    <div class="tech-card">
+                        <h3>Real-Time Processing</h3>
+                        <p>FastAPI backend provides instant analysis with detailed breakdowns of risk factors and confidence scores.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>📊 Our Dataset</h2>
+                <div class="dataset-stats">
+                    <div class="stat-box">
+                        <div class="stat-big">27,566</div>
+                        <p>Total Job Postings</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-big">95%+</div>
+                        <p>Model Accuracy</p>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-big">7</div>
+                        <p>Analysis Features</p>
+                    </div>
+                </div>
+                <p>Our model is trained on a comprehensive dataset combining multiple sources of real and fraudulent job postings, ensuring robust detection across various scam patterns.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>🛠️ How It Works</h2>
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Input Analysis</h3>
+                        <p>You provide job posting text, URLs, or screenshots</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>AI Processing</h3>
+                        <p>Our ML model generates embeddings and analyzes patterns</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Multi-Check</h3>
+                        <p>Runs text analysis, website verification, and LinkedIn checks</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h3>Risk Score</h3>
+                        <p>Combines all factors into a comprehensive risk assessment</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section" id="faq">
+                <h2>❓ Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <h3>Is this tool 100% accurate?</h3>
+                        <p>While our model achieves 95%+ accuracy, no automated system is perfect. Use it as a helpful tool alongside your own judgment and research.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>What data do you collect?</h3>
+                        <p>We only analyze the information you provide (job text, URLs). We don't store personal information or track users.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Can I use this for any job posting?</h3>
+                        <p>Yes! While optimized for internships, it works for any job posting analysis.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>What if I find a scam?</h3>
+                        <p>Report it to local authorities, the platform where you found it, and warn others in your network.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Is this service free?</h3>
+                        <p>Yes, completely free! Our goal is to protect as many job seekers as possible.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>🚀 Technology Stack</h2>
+                <div class="tech-stack">
+                    <div class="stack-item">
+                        <strong>Backend:</strong> FastAPI, Python
+                    </div>
+                    <div class="stack-item">
+                        <strong>ML/AI:</strong> Scikit-learn, Sentence Transformers, FAISS
+                    </div>
+                    <div class="stack-item">
+                        <strong>NLP:</strong> Custom text analysis, grammar checking
+                    </div>
+                    <div class="stack-item">
+                        <strong>OCR:</strong> Tesseract, OpenCV, Pillow
+                    </div>
+                    <div class="stack-item">
+                        <strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Try Our Analyzer</h2>
+            <p>See how our AI can help protect you from scams</p>
+            <a href="analyzer.html" class="btn btn-large">Start Analysis</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🔍 Scam Detector</h3>
+                    <p>Protecting job seekers from fraudulent internship postings using AI and machine learning.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="home.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="awareness.html">Awareness</a></li>
+                        <li><a href="analyzer.html">Analyzer</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="awareness.html#tips">Safety Tips</a></li>
+                        <li><a href="awareness.html#report">Report Scam</a></li>
+                        <li><a href="about.html#faq">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Internship Scam Detector. Built with AI to protect job seekers.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
