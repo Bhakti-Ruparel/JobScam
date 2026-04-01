@@ -12,3 +12,5 @@ beautifulsoup4==4.12.3
 pytesseract==0.3.10
 opencv-python-headless==4.9.0.80
 Pillow==10.2.0
+torch==2.1.0+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
