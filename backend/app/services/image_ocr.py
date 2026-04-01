@@ -5,9 +5,8 @@ import numpy as np
 import os
 import sys
 
-# Configure Tesseract path based on OS
+# On Windows, auto-detect Tesseract path
 if sys.platform == "win32":
-    # Try common Windows installation paths
     possible_paths = [
         r"C:\Program Files\Tesseract-OCR\tesseract.exe",
         r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
@@ -16,6 +15,9 @@ if sys.platform == "win32":
         if os.path.exists(path):
             pytesseract.pytesseract.tesseract_cmd = path
             break
+else:
+    # Linux/Docker - explicit path
+    pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 
 SCAM_KEYWORDS = [
     "registration fee",
@@ -37,6 +39,9 @@ def preprocess_image(image: Image.Image):
 def analyze_image(file):
     try:
         image = Image.open(file.file)
+        # Resize large images to save memory
+        if image.width > 1500 or image.height > 1500:
+            image.thumbnail((1500, 1500))
         processed_img = preprocess_image(image)
         extracted_text = pytesseract.image_to_string(processed_img)
     except Exception as e:

@@ -1,6 +1,8 @@
 import joblib
+import pickle
 import numpy as np
 from pathlib import Path
+from sentence_transformers import SentenceTransformer
 
 class MLModelService:
     _instance = None
@@ -9,19 +11,16 @@ class MLModelService:
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls._instance._initialized = False
-            cls._instance.classifier = None
-            cls._instance.embedder = None
         return cls._instance
     
-    def _load(self):
-        """Lazy load - only loads when first prediction is needed"""
+    def __init__(self):
         if self._initialized:
             return
-            
+        
         possible_paths = [
-            Path("models"),
-            Path("../models"),
-            Path(__file__).parent.parent.parent.parent / "models",
+            Path(__file__).parent.parent / "models",   # backend/models/ (preferred)
+            Path("models"),                             # root models/
+            Path("../models"),                          # one level up
         ]
         
         model_dir = None
@@ -31,53 +30,26 @@ class MLModelService:
                 break
         
         if model_dir is None:
-            raise FileNotFoundError("Models directory not found. Run train_simple.py first.")
+            raise FileNotFoundError(
+                f"Models directory not found. Tried:\n" + 
+                "\n".join([f"- {p.absolute()}" for p in possible_paths]) +
+                f"\n\nPlease run 'python train_simple.py' from project root to create model files."
+            )
         
-        # Load classifier (small - always from file)
+        # Load classifier
         self.classifier = joblib.load(model_dir / "job_scam_classifier.pkl")
         
         # Load embedder - try pkl first, fall back to downloading
         embedder_path = model_dir / "text_embedder.pkl"
         try:
-            import pickle
             with open(embedder_path, "rb") as f:
                 self.embedder = pickle.load(f)
         except Exception:
-            from sentence_transformers import SentenceTransformer
-            print("Downloading sentence transformer model...")
+            # Fall back to downloading the model directly
+            print("Loading sentence transformer from HuggingFace...")
             self.embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
         
         self._initialized = True
-    
-    def predict(self, text: str):
-        """Predict if job posting is a scam"""
-        try:
-            self._load()
-            embedding = self.embedder.encode([text])
-            prediction = self.classifier.predict(embedding)
-            probability = self.classifier.predict_proba(embedding)
-            is_scam = bool(prediction[0] == 1)
-            confidence = float(np.max(probability))
-            scam_probability = float(probability[0][1])
-            return {
-                "is_scam": is_scam,
-                "confidence": confidence,
-                "scam_probability": scam_probability,
-                "ml_risk_score": int(scam_probability * 100)
-            }
-        except Exception as e:
-            # If model fails, return neutral result
-            return {
-                "is_scam": False,
-                "confidence": 0.0,
-                "scam_probability": 0.0,
-                "ml_risk_score": 0,
-                "error": str(e)
-            }
-
-# Singleton - does NOT load at import time
-ml_service = MLModelService()
-
     
     def predict(self, text: str):
         """Predict if job posting is a scam using ML model"""

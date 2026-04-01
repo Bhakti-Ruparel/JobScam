@@ -1,0 +1,27 @@
+# Git
+.git/
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Jupyter
+*.ipynb
+.ipynb_checkpoints/
+
+# Large model files (keep classifier only)
+models/text_embedder.pkl
+models/job_memory_meta.pkl
+models/job_memory.index
+
+# Data
+datasets/
+*.csv
+
+# Dev files
+train_simple.py
+anaconda_projects/
+.vscode/

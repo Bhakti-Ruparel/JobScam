@@ -1,23 +1,22 @@
-# Large model files
-models/text_embedder.pkl
-models/job_memory_meta.pkl
-models/job_memory.index
+# Large model files (too big for Git)
+backend/models/text_embedder.pkl
+backend/models/job_memory_meta.pkl
+backend/models/job_memory.index
 
-# Keep classifier (small)
-!models/job_scam_classifier.pkl
+# Keep classifier (small ~1MB)
+!backend/models/job_scam_classifier.pkl
 
-# Python
+# Python cache
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
 .env
-*.egg-info/
 
 # Jupyter
+*.ipynb
 .ipynb_checkpoints/
 
-# Data & datasets
+# Datasets
 datasets/
 *.csv
 
@@ -27,11 +26,9 @@ venv/
 .nlp/
 env/
 
-# IDE
+# IDE & OS
 .vscode/
 .idea/
-
-# Misc
 anaconda_projects/
 *.db
 *.swp

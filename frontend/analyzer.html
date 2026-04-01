@@ -380,7 +380,9 @@
     </div>
 
     <script>
-        const API_URL = 'http://localhost:8000';
+        const API_URL = window.location.origin === 'null' || window.location.origin === 'file://' 
+            ? 'http://localhost:8000' 
+            : window.location.origin;
         
         function loadScamExample() {
             document.getElementById('offerText').value = `URGENT HIRING! 🚨
