@@ -1,24 +1,30 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
-# Install dependencies (FIXED)
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+# Install Tesseract + system dependencies
+RUN apt-get update && apt-get install -y \
     tesseract-ocr \
+    tesseract-ocr-eng \
     libglib2.0-0 \
     libsm6 \
     libxext6 \
-    libxrender1 \
-    libgl1 \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    libxrender-dev \
+    libgl1-mesa-glx \
+    && rm -rf /var/lib/apt/lists/*
+
+# Tesseract data path
+ENV TESSDATA_PREFIX=/usr/share/tesseract-ocr/4.00/tessdata
+ENV PORT=8000
 
 WORKDIR /app
 
+# Copy requirements first for better layer caching
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy project (model downloads at runtime, not baked in)
 COPY backend/ ./backend/
 COPY frontend/ ./frontend/
 
 ENV PYTHONPATH=/app
 
-CMD ["sh", "-c", "uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT

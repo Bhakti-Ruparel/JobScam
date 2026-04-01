@@ -1,6 +1,7 @@
 import joblib
 import pickle
 import numpy as np
+import os
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
 
@@ -17,11 +18,15 @@ class MLModelService:
         if self._initialized:
             return
         
+        # Fix 4 — Check MODEL_DIR env variable first, fallback to pathlib
+        env_model_dir = os.environ.get("MODEL_DIR", "")
         possible_paths = [
-            Path(__file__).parent.parent / "models",   # backend/models/ (preferred)
-            Path("models"),                             # root models/
-            Path("../models"),                          # one level up
+            Path(env_model_dir) if env_model_dir else None,
+            Path(__file__).parent.parent.parent / "models",  # backend/models/
+            Path(__file__).parent.parent / "models",         # fallback
+            Path("models"),                                   # root models/
         ]
+        possible_paths = [p for p in possible_paths if p is not None]
         
         model_dir = None
         for path in possible_paths:
