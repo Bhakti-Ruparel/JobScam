@@ -1,0 +1,37 @@
+# Large model files
+models/text_embedder.pkl
+models/job_memory_meta.pkl
+models/job_memory.index
+
+# Keep classifier (small)
+!models/job_scam_classifier.pkl
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data & datasets
+datasets/
+*.csv
+
+# Virtual environments
+.venv/
+venv/
+.nlp/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Misc
+anaconda_projects/
+*.db
+*.swp

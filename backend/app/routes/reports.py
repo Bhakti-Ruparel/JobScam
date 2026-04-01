@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 
-router = APIRouter() # ✅ THIS LINE WAS MISSING OR MISNAMED
+router = APIRouter() #  THIS LINE WAS MISSING OR MISNAMED
 
 
 @router.get("/")
