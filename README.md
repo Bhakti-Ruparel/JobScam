@@ -1,4 +1,4 @@
-# 🔍 Internship Scam Detector
+# 🛡️ SafeOffer
 
 An AI-powered web application that detects fake internship and job postings using Machine Learning, NLP, and multi-factor analysis.
 
@@ -22,7 +22,7 @@ An AI-powered web application that detects fake internship and job postings usin
 ## 📁 Project Structure
 
 ```
-internship-scam-detector/
+safeoffer/
 ├── backend/
 │   └── app/
 │       ├── main.py              # FastAPI app entry point

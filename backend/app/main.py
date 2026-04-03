@@ -75,7 +75,7 @@ def check_tesseract() -> str:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     port = os.environ.get("PORT", "8000")
-    log.info(f"🚀 Starting Internship Scam Detector on port {port}")
+    log.info(f"🚀 Starting SafeOffer on port {port}")
     log.info(f"📁 Model directory: {MODEL_DIR.absolute()}")
     log.info(f"   classifier : {'✅ exists' if CLASSIFIER_PATH.exists() else '❌ missing'}")
     log.info(f"   embedder   : {'✅ exists' if EMBEDDER_PATH.exists() else '⬇️  will download'}")
@@ -106,8 +106,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Internship Scam Detection API",
-    description="Detect fake internships using ML, NLP, OCR and web analysis",
+    title="SafeOffer API",
+    description="SafeOffer - Detect fake internships using ML, NLP, OCR and web analysis",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -155,8 +155,6 @@ def health_check():
 # Serve frontend
 frontend_path = Path(__file__).parent.parent.parent / "frontend"
 if frontend_path.exists():
-    app.mount("/static", StaticFiles(directory=str(frontend_path)), name="static")
-
     @app.get("/")
     def serve_home():
         return FileResponse(str(frontend_path / "home.html"))
@@ -167,3 +165,10 @@ if frontend_path.exists():
         if file.exists():
             return FileResponse(str(file))
         return FileResponse(str(frontend_path / "home.html"))
+
+    @app.get("/styles.css")
+    def serve_css():
+        return FileResponse(str(frontend_path / "styles.css"), media_type="text/css")
+
+    # Mount static files last so API routes take priority
+    app.mount("/", StaticFiles(directory=str(frontend_path)), name="static")
